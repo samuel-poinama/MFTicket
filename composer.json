@@ -1,0 +1,18 @@
+{
+    "name": "sam/mf-ticket",
+    "type": "project",
+    "require": {
+        "dotenv-org/phpdotenv-vault": "^0.2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sam\\MfTicket\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "samuel-poinama",
+            "email": "samuel.poinama@efrei.net"
+        }
+    ]
+}
