@@ -1,5 +1,9 @@
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__ . '/../');
+$dotenv->safeLoad();
 
 // Route the request to the right place
 // This is the router
@@ -39,7 +43,7 @@ if ($path == '/') {
 } else if ($path == '/login') {
     require __DIR__ . '/view/Login.php';
 } else if ($path == '/404') {
-    require_once(__DIR__ . '/controller/ErrorRequest.php');
+    require_once __DIR__ . '/controller/ErrorRequest.php';
     echo errorResponse(404);
 } else {
     header('Location: /404');
