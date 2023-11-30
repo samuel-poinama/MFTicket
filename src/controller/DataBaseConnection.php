@@ -29,4 +29,9 @@
             // return result
             return $result;
         }
+
+        public function execute($query) {
+            // execute query
+            $this->pdo->exec($query);
+        }
     }

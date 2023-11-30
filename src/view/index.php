@@ -11,8 +11,10 @@
             require_once __DIR__ . '/../controller/DataBaseConnection.php';
 
             $db = new DataBaseConnection();
+            
+            
+            $db->execute("INSERT INTO users (email, password) VALUES ('email@email.email', 'email')");
             $result = $db->query("SELECT * FROM users");
-
             foreach ($result as $row) {
                 var_dump($row);
             }
