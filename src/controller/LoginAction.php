@@ -24,8 +24,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
-$user = new User(null, $email, $password);
-
-$user = $user->isValidCredentials();
+$user = User::getUserInDataBase($email, $password);
 
 var_dump($user);

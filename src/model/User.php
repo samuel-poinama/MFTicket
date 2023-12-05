@@ -14,18 +14,17 @@ class User {
     }
 
 
-    public function isValidCredentials() {
+
+    public static function getUserInDataBase($email, $password) {
         $db = new DataBaseConnection();
-        $result = $db->query("SELECT * FROM users WHERE email = '$this->email' AND password = '$this->password'");
-        
+        $result = $db->query("SELECT * FROM users WHERE email = '$email' AND password = '$password'");
 
         if ($result->rowCount() == 1) {
             $data = $result->fetchAll()[0];
 
-        $this->id = $data['id'];
-
-        return true;
+            return new User($data['id'], $data['email'], $data['password']);
         }
-        return false;
+
+        return null;
     }
 }
