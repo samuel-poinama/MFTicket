@@ -24,6 +24,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
-$user = User::getUserInDataBase($email, $password);
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+$user = User::getUserInDataBase($email, $hashedPassword);
 
 var_dump($user);
