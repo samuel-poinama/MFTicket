@@ -10,11 +10,11 @@
     <?php
         include(__DIR__ . '/TopBar.php');
     ?>
-    <form action="" method="post" id="login" >
+    <form action="LoginAction" method="post" id="login" >
         <p>email:</p>
-        <input type="text">
+        <input type="text" name="email" >
         <p>password:</p>
-        <input type="password">
+        <input type="password" name="password" >
         <input type="submit" value="Login">
     </form>
 </body>
