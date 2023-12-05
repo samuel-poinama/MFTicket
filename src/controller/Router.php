@@ -1,26 +1,19 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
-
-$dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__ . '/../');
-$dotenv->safeLoad();
-
 // Route the request to the right place
-// This is the router
-
 $parsed_url = parse_url($_SERVER['REQUEST_URI']);
 
 // make images, css work
 if (preg_match('/\.(png|jpg|jpeg|css)$/', $parsed_url['path'])) {
-    $imagePath = __DIR__ . $parsed_url['path'];
+    $assetPath = __DIR__ . '/../' . $parsed_url['path'];
 
-    if (file_exists($imagePath)) {
-        $mime_type = mime_content_type($imagePath);
-        if (pathinfo($imagePath, PATHINFO_EXTENSION) === 'css') {
+    if (file_exists($assetPath)) {
+        $mime_type = mime_content_type($assetPath);
+        if (pathinfo($assetPath, PATHINFO_EXTENSION) === 'css') {
             $mime_type = 'text/css';
         }
         header("Content-Type: $mime_type");
-        readfile($imagePath);
+        readfile($assetPath);
         exit();
     } else {
         header('Location: /404');
@@ -39,13 +32,13 @@ if ($path == '/index') {
 
 // Route the request to the right place
 if ($path == '/') {
-    require __DIR__ . '/view/index.php';
+    require __DIR__ . '/../view/Main.php';
 } else if ($path == '/login') {
-    require __DIR__ . '/view/Login.php';
+    require __DIR__ . '/../view/Login.php';
 } else if ($path == '/LoginAction') {
-    require_once __DIR__ . '/controller/LoginAction.php';
+    require_once __DIR__ . '/../controller/LoginAction.php';
 } else if ($path == '/404') {
-    require_once __DIR__ . '/controller/ErrorRequest.php';
+    require_once __DIR__ . '/../controller/ErrorRequest.php';
     echo errorResponse(404);
 } else {
     header('Location: /404');
