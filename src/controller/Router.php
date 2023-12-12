@@ -19,6 +19,8 @@ if ($path == '/') {
     require __DIR__ . '/../view/Login.php';
 } else if ($path == '/LoginAction') {
     require_once __DIR__ . '/../controller/LoginAction.php';
+} else if ($path == '/admin') {
+    require_once __DIR__ . '/../view/Admin.php';
 } else if ($path == '/404') {
     require_once __DIR__ . '/../controller/ErrorRequest.php';
     echo errorResponse(404);

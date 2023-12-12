@@ -1,0 +1,53 @@
+#grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100%;
+}
+
+#groups {
+    height: 100%;
+    text-align: center;
+}
+
+#groups ul li {
+    padding: 10px 0 10px 0;
+    background-color: white;
+}
+
+#operators {
+    text-align: center;
+
+}
+
+#operators h1 {
+    margin-bottom: 0;
+}
+
+#groups ul {
+    /*background-color: #b1b2b5;*/
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+    height: 100%;
+}
+
+#table {
+    background-color: #b1b2b5;
+    height: 100%;
+
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    text-align: center;
+    border: solid 1px black;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
