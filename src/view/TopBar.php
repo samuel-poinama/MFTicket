@@ -23,8 +23,8 @@ if ($path == 'login') {
 <div>
     <link rel="stylesheet" href="/assets/css/topBar.css">
     <nav id="top_bar">
-        <a><img src="/assets/img/logo.jpg" alt="logo" width="64" /></a>
+        <a href="/"><img src="/assets/img/logo.jpg" alt="logo" width="64" /></a>
         <h1><?php echo $title ?></h1>
-        <a href="/"><img src="/assets/img/cancel.png" width="32" /></a>
+        <a href="/login"><img src="/assets/img/login_white.png" width="50" /></a>
     </nav>
 </div>
