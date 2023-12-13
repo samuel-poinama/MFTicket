@@ -12,19 +12,27 @@ if ($path == '/index') {
     exit();
 }
 
-// Route the request to the right place
-if ($path == '/') {
-    require __DIR__ . '/../view/Main.php';
-} else if ($path == '/login') {
-    require __DIR__ . '/../view/Login.php';
-} else if ($path == '/LoginAction') {
-    require_once __DIR__ . '/../controller/LoginAction.php';
-} else if ($path == '/admin') {
-    require_once __DIR__ . '/../view/Admin.php';
-} else if ($path == '/404') {
-    require_once __DIR__ . '/../controller/ErrorRequest.php';
-    echo errorResponse(404);
-} else {
-    header('Location: /404');
-    exit();
+switch ($path) {
+    case '/':
+        require __DIR__ . '/../view/Main.php';
+        break;
+    case '/login':
+        require __DIR__ . '/../view/Login.php';
+        break;
+    case '/loginAction':
+        require_once __DIR__ . '/../controller/LoginAction.php';
+        break;
+    case '/logout':
+        require_once __DIR__ . '/../controller/LogOut.php';
+        break;
+    case '/admin':
+        require_once __DIR__ . '/../view/Admin.php';
+        break;
+    case '/404':
+        require_once __DIR__ . '/../controller/ErrorRequest.php';
+        echo errorResponse(404);
+        break;
+    default:
+        header('Location: /404');
+        break;
 }
