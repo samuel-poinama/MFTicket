@@ -1,30 +1,51 @@
 <?php
 require_once __DIR__ . '/DataBaseConnection.php';
+require_once __DIR__ . '/Token.php';
 
 
-class User {
+class Credentials {
     private $id;
     private $email;
-    private $password;
+    private $token;
+    private $db;
 
-    public function __construct($id, $email, $password) {
+    public function __construct($id, $email) {
         $this->id = $id;
         $this->email = $email;
-        $this->password = $password;
+        $this->token = null;
+        $this->db = new DataBaseConnection();
     }
 
 
 
-    public static function getUserInDataBase($email, $password) {
+    public static function getCredentials($email, $password) {
         $db = new DataBaseConnection();
-        $result = $db->query("SELECT * FROM users WHERE email = '$email' AND password = '$password'");
+
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $result = $db->query("SELECT * FROM credentials WHERE email = '$email'");
+
 
         if ($result->rowCount() == 1) {
-            $data = $result->fetchAll()[0];
-
-            return new User($data['id'], $data['email'], $data['password']);
+            if (password_verify($password, $hashedPassword)) {
+                $data = $result->fetchAll()[0];
+                $creds = new Credentials($data['id'], $data['email'], $data['hash']);
+                $creds->generateToken();
+            }
         }
 
         return null;
+    }
+
+
+    private function generateToken() {
+        $token = md5(uniqid(mt_rand()));
+        $this->token = Token::getTokenFromDatabase($this->id);
+        if ($this->token == null || $this->token->isExpired()) {
+            $this->token = Token::generateToken($this->id);
+        }
+       
+        
+        return $token;
     }
 }

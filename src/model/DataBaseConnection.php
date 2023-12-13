@@ -32,6 +32,6 @@
 
         public function execute($query) {
             // execute query
-            $this->pdo->exec($query);
+            return $this->pdo->exec($query);
         }
     }
