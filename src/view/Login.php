@@ -6,7 +6,7 @@
     <link href="/assets/css/login.css" rel="stylesheet">
 </head>
 <body>
-    <form action="LoginAction" method="post" id="login" >
+    <form action="loginAction" method="post" id="login" >
         <p>email:</p>
         <input type="text" name="email" >
         <p>password:</p>

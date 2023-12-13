@@ -26,6 +26,11 @@ if ($path == 'login') {
     <nav id="top_bar">
         <a href="/"><img src="/assets/img/logo.jpg" alt="logo" width="64" /></a>
         <h1><?php echo $title ?></h1>
-        <a href="/login"><img src="/assets/img/login_white.png" width="50" /></a>
+        <?php if (isset($_SESSION['creds'])) { ?>
+        <a href="/logout"><img src="/assets/img/login_white.png" width="50" /></a>
+        <?php } else { ?>
+            <a href="/"><img src="/assets/img/close_white.png" width="50" /></a>
+        <?php } ?>
+
     </nav>
 </div>
