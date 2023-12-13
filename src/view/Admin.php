@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/adminPanel.css" rel="stylesheet">
     <title>Admin Panel</title>
 </head>

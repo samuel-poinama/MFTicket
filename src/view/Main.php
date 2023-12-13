@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>MFTicket</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <h1>
@@ -14,7 +13,7 @@
             
             
             //$db->execute("INSERT INTO users (email, password) VALUES ('email@email.email', 'email')");
-            $result = $db->query("SELECT * FROM users");
+            $result = $db->query("SELECT * FROM credentials");
             foreach ($result as $row) {
                 var_dump($row);
             }
