@@ -24,6 +24,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
-$user = Credentials::getCredentials($email, $password);
+$creds = Credentials::getCredentials($email, $password);
 
-var_dump($user);
+var_dump("ok");
+$_SESSION['creds'] = $creds;

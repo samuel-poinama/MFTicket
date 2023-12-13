@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__ . '/.');
 $dotenv->safeLoad();
+session_start();
 
 /*
 $t = md5(uniqid(mt_rand()));

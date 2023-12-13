@@ -17,6 +17,8 @@
             foreach ($result as $row) {
                 var_dump($row);
             }
+
+            var_dump($_SESSION);
         ?>
     </h1>
 </body>

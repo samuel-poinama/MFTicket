@@ -4,16 +4,14 @@ require_once __DIR__ . '/Token.php';
 
 
 class Credentials {
-    private $id;
-    private $email;
-    private $token;
-    private $db;
+    private int $id;
+    private string $email;
+    private Token|null $token;
 
-    public function __construct($id, $email) {
+    public function __construct(int $id, string $email) {
         $this->id = $id;
         $this->email = $email;
         $this->token = null;
-        $this->db = new DataBaseConnection();
     }
 
 
@@ -31,6 +29,8 @@ class Credentials {
                 $data = $result->fetchAll()[0];
                 $creds = new Credentials($data['id'], $data['email'], $data['hash']);
                 $creds->generateToken();
+
+                return $creds;
             }
         }
 
@@ -41,11 +41,11 @@ class Credentials {
     private function generateToken() {
         $token = md5(uniqid(mt_rand()));
         $this->token = Token::getTokenFromDatabase($this->id);
-        if ($this->token == null || $this->token->isExpired()) {
+        $isExpired = $this->token == null || $this->token->isExpired();
+        var_dump("ok");
+        if ($isExpired) {
+            var_dump("ok");
             $this->token = Token::generateToken($this->id);
         }
-       
-        
-        return $token;
     }
 }
