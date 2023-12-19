@@ -10,9 +10,12 @@ class Group {
         $this->name = $name;
     }
 
+    public function isAdmin(): bool {
+        return $this->name == "admin";
+    }
 
     public function isPermissionGranted(string $name): bool {
-        return $this->name == "admin" || $this->name == $name;
+        return $this->isAdmin() || $this->name == $name;
     }
 
     public static function getGroupWithId($id) {

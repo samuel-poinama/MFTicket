@@ -1,3 +1,11 @@
+<?php
+if (!$_SESSION['creds']->getGroup()->isAdmin()) {
+    header("Location: /");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

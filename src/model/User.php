@@ -16,7 +16,11 @@ class Credentials {
         $this->token = null;
     }
 
-    
+    public function getGroup(): Group {
+        return $this->group;
+    }
+
+
     private function generateToken() {
         $this->token = Token::getTokenFromDatabase($this->id);
         $isExpired = $this->token == null || $this->token->isExpired();

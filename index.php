@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/src/model/User.php';
 
 // assets router
 include __DIR__ . '/src/controller/AssetsRouter.php';
