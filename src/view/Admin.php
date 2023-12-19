@@ -14,6 +14,23 @@ if (!$_SESSION['creds']->getGroup()->isAdmin()) {
     <title>Admin Panel</title>
 </head>
 <body>
+    <script>
+        function showCreateGroup() {
+            document.getElementById("create_group").style.display = "block";
+        }
+
+        function hideCreateGroup() {
+            document.getElementById("create_group").style.display = "none";
+        }
+    </script>
+
+    <div id="create_group" >
+        <form action="createGroup" method="post">
+            <input type="text" name="name" placeholder="Group Name">
+            <input type="submit" value="Create">
+            <button onClick="hideCreateGroup()" type="button">close</button>
+        </form>
+    </div>
     <div id="grid">
         <div id="groups">
             <h1>Groups</h1>
@@ -30,6 +47,9 @@ if (!$_SESSION['creds']->getGroup()->isAdmin()) {
                 }
                 ?>
             </ul>
+            <button onClick="showCreateGroup()">
+                <img src="/assets/img/plus.png" width="32px" id="plus">
+            </button>
         </div>
         <div id="operators">
             <h1>Operators</h1>
