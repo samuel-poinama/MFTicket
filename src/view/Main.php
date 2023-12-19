@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MFTicket</title>
-</head>
-<body>
-    <h1>
-        <?php
-            require_once __DIR__ . '/../model/DataBaseConnection.php';
+<?php
+            require_once __DIR__ . '/../model/Groups.php';
+            
+            /*
+            $t = md5(uniqid(mt_rand()));
+            $hashedPassword = password_hash("1234", PASSWORD_DEFAULT);
+            echo $hashedPassword;
+            */
 
-            $db = new DataBaseConnection();
-            
-            
-            //$db->execute("INSERT INTO users (email, password) VALUES ('email@email.email', 'email')");
-            $result = $db->query("SELECT * FROM credentials");
-            foreach ($result as $row) {
-                var_dump($row);
-            }
+            Group::getGroupWithId(11);
 
             var_dump($_SESSION);
-        ?>
-    </h1>
-</body>
-</html>
+
+?>
