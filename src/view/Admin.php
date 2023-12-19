@@ -18,8 +18,18 @@ if (!$_SESSION['creds']->getGroup()->isAdmin()) {
         <div id="groups">
             <h1>Groups</h1>
             <ul id="groups_list">
-                <li>aaaaaaaaaaaaaaaaaaaaaa</li>
-                <li>bbbbbbbbbbbbbbbbbbbbbb</li>
+                <?php
+                $groups = Group::getGroups();
+                foreach ($groups as $group) {
+                
+                    echo "<li>
+                            <a href='?group=$group'>
+                                $group
+                            </a>
+                        </li>";
+                }
+                ?>
+            </ul>
         </div>
         <div id="operators">
             <h1>Operators</h1>
@@ -28,12 +38,34 @@ if (!$_SESSION['creds']->getGroup()->isAdmin()) {
                     <tr>
                         <th>Person</th>
                         <th>Group</th>
-                        <th>task</th>
+                        <th>Task</th>
+                        <th>isDone</th>
                     </tr>
-                    <tr>
-                        <td>aaaaaaaaaaaaaaaaaaaaaa</td>
-                        <td>bbbbbbbbbbbbbbbbbbbbbb</td>
-                        <td>cccccccccccccccccccccc</td>
+                    <?php
+                        $allUsers = Credentials::getAllUSersEmailsWithGroup();
+
+                        foreach ($allUsers as $user) {
+                            echo "<tr>
+                                    <td>{$user->getEmail()}</td>
+                                    <td>{$user->getGroup()->getName()}</td>";
+
+                            if ($user->getTask() == null) {
+                                echo "<td>Not Assigned</td>";
+                                echo "<td>Not Assigned</td>";
+                            } else {
+                                echo "<td>{$user->getTask()->getName()}</td>";
+                                if ($user->getTask()->isDone()) {
+                                    echo "<td>Done</td>";
+                                } else {
+                                    echo "<td>Not Done</td>";
+                                }
+                            }
+
+                            echo "</tr>";
+
+                            
+                        }
+                    ?>
                 </table>
             </div>
     </div>

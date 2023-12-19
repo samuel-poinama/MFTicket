@@ -10,6 +10,10 @@ class Group {
         $this->name = $name;
     }
 
+    public function getName(): string {
+        return $this->name;
+    }
+
     public function isAdmin(): bool {
         return $this->name == "admin";
     }
@@ -44,6 +48,11 @@ class Group {
         $result = $db->execute("REPLACE INTO `groups` (groups_id, name) VALUES ($id, '$name')");
     }
 
+    public static function getGroups() {
+        $json = file_get_contents(__DIR__ . '/../../config.json');
+        $data = json_decode($json, true);
+        return $data['groups'];
+    }
 
     public static function createGroup($name) {
         if (self::isGroupExists($name)) {
