@@ -71,7 +71,7 @@ if (isset($_GET['error'])) {
                 <?php
                 $tickets = Ticket::getAllTickets();
                 foreach ($tickets as $ticket) {
-                    echo "<li>{$ticket->getName()}</li>";
+                    echo "<li><a href='selectTicket?name={$ticket->getName()} >{$ticket->getName()}<a></li>";
                 }
                 ?>
             </ul>
