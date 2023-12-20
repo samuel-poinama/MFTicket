@@ -67,12 +67,23 @@ class Group {
     }
 
     public static function deleteGroup($name) {
+        if (!self::isGroupExists($name)) {
+            return;
+        }
+
+        if ($name == "admin" || $name == "staff") {
+            return;
+        }
+
         $json = file_get_contents(__DIR__ . '/../../config.json');
         $data = json_decode($json, true);
         $index = array_search($name, $data['groups']);
         unset($data['groups'][$index]);
         $json = json_encode($data);
         file_put_contents(__DIR__ . '/../../config.json', $json);
+
+        $db = new DataBaseConnection();
+        $result = $db->execute("UPDATE  `groups` SET name = 'staff' WHERE name = '$name';");
     }
 
     public static function isGroupExists($name) {

@@ -88,6 +88,11 @@ if (!array_key_exists('creds', $_SESSION) || !$_SESSION['creds']->getGroup()->is
                         }
                     ?>
                 </table>
+                <form id="remove" method="post" action="removeGroup" >
+                <button type="submit" name="group" value=<?php echo $group ?> >
+                    <img src="/assets/img/remove.png" width="32px" id="remove">
+                </button>
+            </form>
             </div>
     </div>
 </body>
