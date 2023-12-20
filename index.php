@@ -10,6 +10,13 @@ $dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__ . '/.');
 $dotenv->safeLoad();
 session_start();
 
+// check token
+
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+    $user->getUserByToken();
+}
+
 // top Bar
 include_once __DIR__ . '/src/view/TopBar.php';
 

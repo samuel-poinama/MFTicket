@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . '/../model/Groups.php';
 
-if (!array_key_exists('user', $_SESSION) || !$_SESSION['user']->getGroup()->isAdmin()) {
-    header("Location: /login");
+
+if (!isset($_SESSION['user']) || !$_SESSION['user']->getGroup()->isAdmin()) {
+    header("Location: /");
     exit();
 }
 

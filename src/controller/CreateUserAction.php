@@ -25,7 +25,7 @@ if (preg_match('/[^a-zA-Z0-9_@.]/', $password)) {
     exit();
 }
 
-$hash = password_hash($password, PASSWORD_DEFAULT);
+$hash = password_hash($password, PASSWORD_BCRYPT);
 $result = User::createUser($email, $hash);
 
 if (!$result) {

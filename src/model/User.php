@@ -36,11 +36,33 @@ class User {
         return $this->ticket;
     }
 
+    public function getToken(): Token|null {
+        return $this->token;
+    }
+
     private function generateToken() {
         $this->token = Token::getTokenFromDatabase($this->id);
         $isExpired = $this->token == null || $this->token->isExpired();
         if ($isExpired) {
             $this->token = Token::generateToken($this->id);
+        }
+    }
+
+    public function getUserByToken() {
+        $db = new DataBaseConnection();
+        $result = $db->query("SELECT id, email, expire FROM users JOIN mfticket.tokens t on users.id = t.token_id WHERE token = '{$this->token->getToken()}'");
+        if ($result->rowCount() == 1) {
+            $data = $result->fetchAll()[0];
+            $this->id = $data['id'];
+            $this->email = $data['email'];
+            $this->token = new Token($this->token->getToken(), strtotime($data['expire']));
+            if ($this->token->isExpired()) {
+                var_dump('expired');
+                session_unset();
+                return;
+            }
+
+            $_SESSION['user'] = $this;
         }
     }
 
@@ -54,13 +76,13 @@ class User {
     public static function getUser($email, $password) {
         $db = new DataBaseConnection();
 
-        $result = $db->query("SELECT * FROM users WHERE email = '$email'");
+        $result = $db->query("SELECT users.id, email, hash FROM users JOIN mfticket.tickets t on t.id = users.ticket_id WHERE email = '$email'");
 
 
         if ($result->rowCount() == 1) {
             $data = $result->fetchAll()[0];
             if (password_verify($password, $data['hash'])) {
-                $user = new User($data['id'], $data['email'], $data['hash']);
+                $user = new User($data['id'], $data['email']);
                 $user->generateToken();
                 $user->group = Group::getGroupWithId($data['id']);
 
@@ -119,4 +141,5 @@ class User {
         $db->execute("UPDATE `groups` SET name = '$group' WHERE groups_id = $id");
         return true;
     }
+
 }

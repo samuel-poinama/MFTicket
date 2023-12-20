@@ -7,7 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 $data = $_POST['group'];
-var_dump($data);
 
 
 if ($data == null) {
@@ -32,9 +31,6 @@ if ($name == null || preg_match('/[^a-zA-Z0-9_ -]/', $name)) {
     header('Location: /admin');
     exit();
 }
-
-var_dump($id, $name);
-
 
 $result = User::changeGroup($id, $name);
 
