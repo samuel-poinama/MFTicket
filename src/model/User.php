@@ -64,15 +64,18 @@ class Credentials {
     }
 
 
-    public static function getAllUSersEmailsWithGroup() {
+    public static function getAllUsersEmailByGroup($group) {
         $db = new DataBaseConnection();
-        $result = $db->query("SELECT * FROM credentials");
+        $result = $db->query("SELECT id, email, g.name, t.name, isDone FROM credentials
+            JOIN mfticket.`groups` g on credentials.id = g.groups_id
+            JOIN mfticket.tasks t on credentials.id = t.tasks_id
+            WHERE g.name = '$group';");
 
         $users = [];
         foreach ($result->fetchAll() as $data) {
             $creds = new Credentials($data['id'], $data['email']);
-            $creds->group = Group::getGroupWithId($data['id']);
-            $creds->task = Task::getTaskById($data['id']);
+            $creds->group = new Group($data[2]);
+            $creds->task = new Task($data['name'], $data['isDone']);
             $users[] = $creds;
         }
 

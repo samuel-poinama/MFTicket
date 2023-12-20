@@ -62,7 +62,8 @@ if (!array_key_exists('creds', $_SESSION) || !$_SESSION['creds']->getGroup()->is
                         <th>isDone</th>
                     </tr>
                     <?php
-                        $allUsers = Credentials::getAllUSersEmailsWithGroup();
+                    $group = $_GET['group'] ?? 'admin';
+                        $allUsers = Credentials::getAllUsersEmailByGroup($group);
 
                         foreach ($allUsers as $user) {
                             echo "<tr>
