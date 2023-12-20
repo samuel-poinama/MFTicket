@@ -44,14 +44,12 @@ class User {
     public static function getUser($email, $password) {
         $db = new DataBaseConnection();
 
-
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $result = $db->query("SELECT * FROM credentials WHERE email = '$email'");
 
 
         if ($result->rowCount() == 1) {
-            if (password_verify($password, $hashedPassword)) {
-                $data = $result->fetchAll()[0];
+            $data = $result->fetchAll()[0];
+            if (password_verify($password, $data['hash'])) {
                 $user = new User($data['id'], $data['email'], $data['hash']);
                 $user->generateToken();
                 $user->group = Group::getGroupWithId($data['id']);
