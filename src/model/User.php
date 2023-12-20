@@ -68,14 +68,15 @@ class Credentials {
         $db = new DataBaseConnection();
         $result = $db->query("SELECT id, email, g.name, t.name, isDone FROM credentials
             JOIN mfticket.`groups` g on credentials.id = g.groups_id
-            JOIN mfticket.tasks t on credentials.id = t.tasks_id
+            LEFT JOIN mfticket.tasks t on credentials.id = t.tasks_id
             WHERE g.name = '$group';");
 
         $users = [];
         foreach ($result->fetchAll() as $data) {
             $creds = new Credentials($data['id'], $data['email']);
             $creds->group = new Group($data[2]);
-            $creds->task = new Task($data['name'], $data['isDone']);
+            if ($data['name'] != null)
+                $creds->task = new Task($data['name'], $data['isDone']);
             $users[] = $creds;
         }
 
