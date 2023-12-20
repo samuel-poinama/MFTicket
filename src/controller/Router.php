@@ -16,6 +16,9 @@ switch ($path) {
     case '/':
         require __DIR__ . '/../view/Main.php';
         break;
+    case '/test':
+        require __DIR__ . '/../view/Test.php';
+        break;
     case '/login':
         require __DIR__ . '/../view/Login.php';
         break;
