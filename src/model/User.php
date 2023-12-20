@@ -10,14 +10,14 @@ class User {
     private string $email;
     private Token|null $token;
     private Group|null $group;
-    private Task|null $task;
+    private Ticket|null $ticket;
 
     public function __construct(int $id, string $email) {
         $this->id = $id;
         $this->email = $email;
         $this->token = null;
         $this->group = null;
-        $this->task = null;
+        $this->ticket = null;
     }
 
     public function getId(): int {
@@ -32,8 +32,8 @@ class User {
         return $this->group;
     }
 
-    public function getTask(): Task|null {
-        return $this->task;
+    public function getTicket(): Ticket|null {
+        return $this->ticket;
     }
 
     private function generateToken() {
@@ -47,7 +47,7 @@ class User {
     public static function getUser($email, $password) {
         $db = new DataBaseConnection();
 
-        $result = $db->query("SELECT * FROM credentials WHERE email = '$email'");
+        $result = $db->query("SELECT * FROM users WHERE email = '$email'");
 
 
         if ($result->rowCount() == 1) {
@@ -67,20 +67,29 @@ class User {
 
     public static function getAllUsersEmailByGroup($group) {
         $db = new DataBaseConnection();
-        $result = $db->query("SELECT id, email, g.name, t.name, isDone FROM credentials
-            JOIN mfticket.`groups` g on credentials.id = g.groups_id
-            LEFT JOIN mfticket.tasks t on credentials.id = t.tasks_id
-            WHERE g.name = '$group';");
+        $result = $db->query("SELECT users.id, t.id, email, g.name, t.name, isDone FROM users
+        JOIN mfticket.`groups` g on users.id = g.groups_id
+        LEFT JOIN mfticket.tickets t on users.ticket_id = t.id WHERE g.name ='$group';");
 
         $users = [];
         foreach ($result->fetchAll() as $data) {
-            $user = new User($data['id'], $data['email']);
-            $user->group = new Group($data[2]);
-            if ($data['name'] != null)
-                $user->task = new Task($data['name'], $data['isDone']);
+            $user = new User($data[0], $data['email']);
+            $user->group = new Group($data[3]);
+            if ($data['id'] != null)
+                $user->ticket = new Ticket($data['id'], $data['name'], $data['isDone']);
             $users[] = $user;
         }
 
         return $users;
+    }
+
+    public static function changeGroup($id, $group) : bool {
+        if (!Group::isGroupExists($group)) {
+            return false;
+        }
+
+        $db = new DataBaseConnection();
+        $db->execute("UPDATE `groups` SET name = '$group' WHERE groups_id = $id");
+        return true;
     }
 }

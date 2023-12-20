@@ -39,7 +39,7 @@
 }
 
 
-#create_group {
+.box {
     position: absolute;
     left: 50%;
     right: 50%;
@@ -50,12 +50,12 @@
     display: none;
 }
 
-#create_group form {
+.box form {
     display: flex;
     flex-direction: column;
 }
 
-#create_group input {
+.box input {
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -80,15 +80,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 0;
 }
 
-#table_form button {
+.button {
     background-color: black;
     color: white;
     border: none;
 }
 
-#table_form button:hover {
+.button:hover {
     cursor: pointer;
     background-color: white;
     color: black;
