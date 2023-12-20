@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_SESSION['creds'])) {
+if (isset($_SESSION['user'])) {
     session_unset();
 }
 

@@ -1,5 +1,5 @@
 <?php
-if (!array_key_exists('creds', $_SESSION) || !$_SESSION['creds']->getGroup()->isAdmin()) {
+if (!array_key_exists('user', $_SESSION) || !$_SESSION['user']->getGroup()->isAdmin()) {
     header("Location: /login");
     exit();
 }
@@ -63,7 +63,7 @@ if (!array_key_exists('creds', $_SESSION) || !$_SESSION['creds']->getGroup()->is
                     </tr>
                     <?php
                     $group = $_GET['group'] ?? 'admin';
-                        $allUsers = Credentials::getAllUsersEmailByGroup($group);
+                        $allUsers = User::getAllUsersEmailByGroup($group);
 
                         foreach ($allUsers as $user) {
                             echo "<tr>

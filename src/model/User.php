@@ -5,7 +5,7 @@ require_once __DIR__ . '/Groups.php';
 require_once __DIR__ . '/Tasks.php';
 
 
-class Credentials {
+class User {
     private int $id;
     private string $email;
     private Token|null $token;
@@ -41,7 +41,7 @@ class Credentials {
         }
     }
 
-    public static function getCredentials($email, $password) {
+    public static function getUser($email, $password) {
         $db = new DataBaseConnection();
 
 
@@ -52,11 +52,11 @@ class Credentials {
         if ($result->rowCount() == 1) {
             if (password_verify($password, $hashedPassword)) {
                 $data = $result->fetchAll()[0];
-                $creds = new Credentials($data['id'], $data['email'], $data['hash']);
-                $creds->generateToken();
-                $creds->group = Group::getGroupWithId($data['id']);
+                $user = new User($data['id'], $data['email'], $data['hash']);
+                $user->generateToken();
+                $user->group = Group::getGroupWithId($data['id']);
 
-                return $creds;
+                return $user;
             }
         }
 
@@ -73,11 +73,11 @@ class Credentials {
 
         $users = [];
         foreach ($result->fetchAll() as $data) {
-            $creds = new Credentials($data['id'], $data['email']);
-            $creds->group = new Group($data[2]);
+            $user = new User($data['id'], $data['email']);
+            $user->group = new Group($data[2]);
             if ($data['name'] != null)
-                $creds->task = new Task($data['name'], $data['isDone']);
-            $users[] = $creds;
+                $user->task = new Task($data['name'], $data['isDone']);
+            $users[] = $user;
         }
 
         return $users;
