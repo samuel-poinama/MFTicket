@@ -7,5 +7,9 @@
 
             var_dump($_SESSION);
 
+            echo "<br><br>";
+
+            var_dump(Group::getGroups());
+
 
 ?>

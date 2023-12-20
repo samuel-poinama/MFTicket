@@ -20,6 +20,10 @@ class User {
         $this->task = null;
     }
 
+    public function getId(): int {
+        return $this->id;
+    }
+
     public function getEmail(): string {
         return $this->email;
     }
@@ -31,7 +35,6 @@ class User {
     public function getTask(): Task|null {
         return $this->task;
     }
-
 
     private function generateToken() {
         $this->token = Token::getTokenFromDatabase($this->id);
