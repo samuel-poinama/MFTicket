@@ -20,6 +20,11 @@ if (!preg_match('/^[a-zA-Z0-9]+$/', $group)) {
 }
 
 
-Group::deleteGroup($group);
+$result = Group::deleteGroup($group);
+if (!$result) {
+    header('Location: /admin?error=canNotDeleteGroup');
+    exit();
+}
+
 
 header('Location: /admin');

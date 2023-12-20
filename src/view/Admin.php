@@ -3,6 +3,24 @@ if (!array_key_exists('user', $_SESSION) || !$_SESSION['user']->getGroup()->isAd
     header("Location: /login");
     exit();
 }
+
+$error = null;
+
+if (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'invalidName':
+            $error = "Invalid Group Name";
+            break;
+        case 'groupExists':
+            $error = "Group Already Exists";
+            break;
+        case 'canNotDeleteGroup':
+            $error = "Can Not Delete Group";
+            break;
+    }
+}
+
+
 ?>
 
 
@@ -31,6 +49,11 @@ if (!array_key_exists('user', $_SESSION) || !$_SESSION['user']->getGroup()->isAd
             <button onClick="hideCreateGroup()" type="button">close</button>
         </form>
     </div>
+    <?php if ($error != null) { ?>
+    <div id="error" >
+            <strong><?php echo $error ?></strong>
+        </div>
+    <?php } ?>
     <div id="grid">
         <div id="groups">
             <h1>Groups</h1>

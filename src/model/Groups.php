@@ -54,9 +54,9 @@ class Group {
         return $data['groups'];
     }
 
-    public static function createGroup($name) {
+    public static function createGroup($name) : bool {
         if (self::isGroupExists($name)) {
-            return;
+            return false;
         }
 
         $json = file_get_contents(__DIR__ . '/../../config.json');
@@ -64,15 +64,17 @@ class Group {
         $data['groups'][] = $name;
         $json = json_encode($data);
         file_put_contents(__DIR__ . '/../../config.json', $json);
+
+        return true;
     }
 
-    public static function deleteGroup($name) {
+    public static function deleteGroup($name) : bool {
         if (!self::isGroupExists($name)) {
-            return;
+            return false;
         }
 
         if ($name == "admin" || $name == "staff") {
-            return;
+            return false;
         }
 
         $json = file_get_contents(__DIR__ . '/../../config.json');
@@ -84,6 +86,8 @@ class Group {
 
         $db = new DataBaseConnection();
         $result = $db->execute("UPDATE  `groups` SET name = 'staff' WHERE name = '$name';");
+
+        return true;
     }
 
     public static function isGroupExists($name) {

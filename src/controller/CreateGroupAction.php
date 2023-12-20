@@ -12,11 +12,15 @@ $name = $_POST['name'];
 
 
 if ($name == null || preg_match('/[^a-zA-Z0-9_ -]/', $name)) {
-    header('Location: /admin');
+    header('Location: /admin?error=invalidName');
     exit();
 }
 
-Group::createGroup($name);
+$result = Group::createGroup($name);
+if (!$result) {
+    header('Location: /admin?error=groupExists');
+    exit();
+}
 
 header('Location: /admin');
 

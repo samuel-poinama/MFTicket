@@ -70,6 +70,11 @@
     border: none;
 }
 
+#error {
+    background-color: rgb(255, 0, 0);
+    text-align: center;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
