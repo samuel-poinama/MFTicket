@@ -8,13 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     exit();
 }
 
-/*
 // check if user are set
 if (array_key_exists('user', $_SESSION)) {
     header('Location: /admin');
     exit();
 }
-*/
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 
