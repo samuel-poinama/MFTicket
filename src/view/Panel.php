@@ -52,7 +52,7 @@ if (isset($_GET['error'])) {
     </script>
 
     <div id="create_tiket" class="box" >
-        <form action="createTiket" method="post">
+        <form action="createTicket" method="post">
             <input type="text" name="name" placeholder="Ticket Name">
             <input type="submit" value="Create tiket" >
             <button onClick="hideCreateTicket()" type="button">close</button>
@@ -90,7 +90,13 @@ if (isset($_GET['error'])) {
                         </tr>
                         <tr>
                             <td>
-                                <strong><?php echo $user->getTicket()->getName() ?></strong>
+                                <strong><?php
+                                if ($user->getTicket() == null) {
+                                    echo "No Ticket";
+                                } else {
+                                    echo $user->getTicket()->getName();
+                                }
+                                 ?></strong>
                             </td>
                             <td>
                                 <input type="checkbox" name="isDone">

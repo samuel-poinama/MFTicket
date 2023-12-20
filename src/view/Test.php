@@ -8,7 +8,7 @@
             echo $hashedPassword . "<br>";
             echo "<br><br>";
 
-            var_dump(Ticket::getAllTickets());
-
+            $user = $_SESSION['user'];
+            var_dump($user->getGroup()->getName());
 
 ?>

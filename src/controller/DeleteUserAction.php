@@ -6,6 +6,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 
+if (!isset($_SESSION['user']) || !$_SESSION['user']->getGroup()->isAdmin()) {
+    header("Location: /");
+    exit();
+}
+
+
 $email = $_POST['email'];
 
 if ($email == null) {

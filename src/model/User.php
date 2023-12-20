@@ -87,12 +87,11 @@ class User {
     public static function getUser($email, $password) {
         $db = new DataBaseConnection();
 
-        $result = $db->query("SELECT users.id, email, hash FROM users JOIN mfticket.tickets t on t.id = users.ticket_id WHERE email = '$email'");
-
+        $result = $db->query("SELECT users.id, email, hash FROM users LEFT JOIN mfticket.tickets t on t.id = users.ticket_id WHERE email = '$email'");
 
         if ($result->rowCount() == 1) {
             $data = $result->fetchAll()[0];
-            if (password_verify($password, $data['hash'])) {
+            if (password_verify($password, $data['hash'])) {       
                 $user = new User($data['id'], $data['email']);
                 $user->generateToken();
                 $user->group = Group::getGroupWithId($data['id']);

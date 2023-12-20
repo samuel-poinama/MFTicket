@@ -56,4 +56,16 @@ class Ticket {
         return null;
     }
 
+
+    public static function createTicket(string $name) {
+        $db = new DataBaseConnection();
+        $result = $db->query("INSERT INTO `tickets` (`name`) VALUES ('$name')");
+
+        if ($result->rowCount() == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
