@@ -44,6 +44,13 @@ class User {
         }
     }
 
+    static public function isEmailExists($email): bool {
+        $db = new DataBaseConnection();
+        $result = $db->query("SELECT * FROM users WHERE email = '$email'");
+
+        return $result->rowCount() == 1;
+    }
+
     public static function getUser($email, $password) {
         $db = new DataBaseConnection();
 
@@ -62,6 +69,16 @@ class User {
         }
 
         return null;
+    }
+
+    public static function createUser($email, $hash) : bool {
+        if (self::isEmailExists($email)) {
+            return false;
+        }
+
+        $db = new DataBaseConnection();
+        $db->execute("INSERT INTO users (email, hash) VALUES ('$email', '$hash')");
+        return true;
     }
 
 

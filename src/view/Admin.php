@@ -22,6 +22,9 @@ if (isset($_GET['error'])) {
         case 'groupDoesNotExist':
             $error = "Group Does Not Exist";
             break;
+        case 'invalidCredentials':
+            $error = "Invalid Credentials";
+            break;
     }
 }
 
@@ -46,11 +49,11 @@ if (isset($_GET['error'])) {
             document.getElementById("create_group").style.display = "none";
         }
 
-        const showCreateTicket = () => {
+        const showCreateUser = () => {
             document.getElementById("create_ticket").style.display = "block";
         }
 
-        const hideCreateTicket = () => {
+        const hideCreateUser = () => {
             document.getElementById("create_ticket").style.display = "none";
         }
     </script>
@@ -64,10 +67,11 @@ if (isset($_GET['error'])) {
     </div>
 
     <div id="create_ticket" class="box" >
-        <form action="createTicket" method="post">
-            <input type="text" name="name" placeholder="Ticket Name">
+        <form action="createUser" method="post">
+            <input type="text" name="email" placeholder="User email">
+            <input type="password" name="password" placeholder="password" >
             <input type="submit" value="Create">
-            <button onClick="hideCreateTicket()" type="button">close</button>
+            <button onClick="hideCreateUser()" type="button">close</button>
         </form>
     </div>
     <?php if ($error != null) { ?>
@@ -148,7 +152,7 @@ if (isset($_GET['error'])) {
                     </table>
                     <button class="button" type="submit">update</button>
                 </form>
-                <button class="button" id="create onClick="showCreateTicket()" >create Ticket</button>
+                <button class="button" id="create" onClick="showCreateUser()" >create user</button>
                 <form id="remove" method="post" action="removeGroup" >
                 <button type="submit" name="group" value=<?php echo $group ?> >
                     <img src="/assets/img/remove.png" width="32px" id="remove">

@@ -22,6 +22,9 @@ switch ($path) {
     case '/login':
         require __DIR__ . '/../view/Login.php';
         break;
+    case '/createUser':
+        require_once __DIR__ . '/../controller/CreateUserAction.php';
+        break;
     case '/loginAction':
         require_once __DIR__ . '/../controller/LoginAction.php';
         break;
