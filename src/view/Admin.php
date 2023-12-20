@@ -50,30 +50,47 @@ if (isset($_GET['error'])) {
         }
 
         const showCreateUser = () => {
-            document.getElementById("create_ticket").style.display = "block";
+            document.getElementById("create_user").style.display = "block";
         }
 
         const hideCreateUser = () => {
-            document.getElementById("create_ticket").style.display = "none";
+            document.getElementById("create_user").style.display = "none";
+        }
+
+        const showDeleteUser = () => {
+            document.getElementById("delete_user").style.display = "block";
+        }
+
+        const hideDeleteUser = () => {
+            document.getElementById("delete_user").style.display = "none";
         }
     </script>
 
     <div id="create_group" class="box" >
         <form action="createGroup" method="post">
             <input type="text" name="name" placeholder="Group Name">
-            <input type="submit" value="Create">
+            <input type="submit" value="Create group" >
             <button onClick="hideCreateGroup()" type="button">close</button>
         </form>
     </div>
 
-    <div id="create_ticket" class="box" >
+    <div id="create_user" class="box" >
         <form action="createUser" method="post">
             <input type="text" name="email" placeholder="User email">
             <input type="password" name="password" placeholder="password" >
-            <input type="submit" value="Create">
+            <input type="submit" value="create user" >
             <button onClick="hideCreateUser()" type="button">close</button>
         </form>
     </div>
+
+    <div id="delete_user" class="box" >
+        <form action="deleteUser" method="post">
+            <input type="text" name="email" placeholder="User email">
+            <input type="submit" value="delete user" >
+            <button onClick="hideDeleteUser()" type="button">close</button>
+        </form>
+    </div>
+
     <?php if ($error != null) { ?>
     <div id="error" >
             <strong><?php echo $error ?></strong>
@@ -153,6 +170,7 @@ if (isset($_GET['error'])) {
                     <button class="button" type="submit">update</button>
                 </form>
                 <button class="button" id="create" onClick="showCreateUser()" >create user</button>
+                <button class="button" id="delete" onClick="showDeleteUser()" >delete user</button>
                 <form id="remove" method="post" action="removeGroup" >
                 <button type="submit" name="group" value=<?php echo $group ?> >
                     <img src="/assets/img/remove.png" width="32px" id="remove">

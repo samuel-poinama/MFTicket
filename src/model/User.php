@@ -81,6 +81,16 @@ class User {
         return true;
     }
 
+    public static function deleteUser($email) : bool {
+        if (!self::isEmailExists($email)) {
+            return false;
+        }
+
+        $db = new DataBaseConnection();
+        $db->execute("DELETE FROM users WHERE email = '$email'");
+        return true;
+    }
+
 
     public static function getAllUsersEmailByGroup($group) {
         $db = new DataBaseConnection();

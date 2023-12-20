@@ -25,6 +25,9 @@ switch ($path) {
     case '/createUser':
         require_once __DIR__ . '/../controller/CreateUserAction.php';
         break;
+    case '/deleteUser':
+        require_once __DIR__ . '/../controller/DeleteUserAction.php';
+        break;
     case '/loginAction':
         require_once __DIR__ . '/../controller/LoginAction.php';
         break;
