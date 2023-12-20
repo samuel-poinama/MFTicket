@@ -1,6 +1,6 @@
 <?php
-if (!$_SESSION['creds']->getGroup()->isAdmin()) {
-    header("Location: /");
+if (!array_key_exists('creds', $_SESSION) || !$_SESSION['creds']->getGroup()->isAdmin()) {
+    header("Location: /login");
     exit();
 }
 ?>

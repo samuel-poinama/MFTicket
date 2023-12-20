@@ -8,6 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     exit();
 }
 
+// check if creds are set
+if (array_key_exists('creds', $_SESSION)) {
+    header('Location: /admin');
+    exit();
+}
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -26,5 +32,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 $creds = Credentials::getCredentials($email, $password);
 
-var_dump("ok");
 $_SESSION['creds'] = $creds;
+
+header('Location: /admin');
