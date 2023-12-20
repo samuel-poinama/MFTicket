@@ -1,3 +1,11 @@
+<?php
+    if (isset($_SESSION['user'])) {
+        header('Location: /admin');
+        exit();
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
