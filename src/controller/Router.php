@@ -28,6 +28,12 @@ switch ($path) {
     case '/admin':
         require_once __DIR__ . '/../view/Admin.php';
         break;
+    case '/createGroup':
+        require_once __DIR__ . '/../controller/CreateGroupAction.php';
+        break;
+    case '/removeGroup':
+        require_once __DIR__ . '/../controller/RemoveGroupAction.php';
+        break;
     case '/404':
         require_once __DIR__ . '/../controller/ErrorRequest.php';
         echo errorResponse(404);
