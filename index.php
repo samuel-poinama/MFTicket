@@ -15,6 +15,7 @@ session_start();
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
     $user->getUserByToken();
+    var_dump($user);
 }
 
 // top Bar

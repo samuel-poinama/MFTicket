@@ -56,6 +56,7 @@ class User {
             $this->id = $data['id'];
             $this->email = $data['email'];
             $this->token = new Token($this->token->getToken(), strtotime($data['expire']));
+            $this->getTicketFromDatabase();
             if ($this->token->isExpired()) {
                 var_dump('expired');
                 session_unset();
@@ -63,6 +64,16 @@ class User {
             }
 
             $_SESSION['user'] = $this;
+        }
+    }
+
+    public function getTicketFromDatabase() {
+        $db = new DataBaseConnection();
+        $result = $db->query("SELECT tickets.id, name, isDone FROM tickets JOIN mfticket.users u on tickets.id = u.ticket_id WHERE u.id = {$this->id}");
+        if ($result->rowCount() == 1) {
+            var_dump('ok');
+            $data = $result->fetchAll()[0];
+            $this->ticket = new Ticket($data['id'], $data['name'], $data['isDone']);
         }
     }
 

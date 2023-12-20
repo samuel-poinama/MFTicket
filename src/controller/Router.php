@@ -37,6 +37,9 @@ switch ($path) {
     case '/admin':
         require_once __DIR__ . '/../view/Admin.php';
         break;
+    case '/panel':
+        require_once __DIR__ . '/../view/Panel.php';
+        break;
     case '/editTicket':
         require_once __DIR__ . '/../controller/ChangeGroupAction.php';
         break;

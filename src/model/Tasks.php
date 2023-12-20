@@ -37,7 +37,8 @@ class Ticket {
         $tickets = [];
 
         foreach ($result->fetchAll() as $data) {
-            $tickets[] = new Ticket($data['id'], $data['name'], $data['is_done']);
+            var_dump($data);
+            $tickets[] = new Ticket($data['id'], $data['name'], $data['isDone']);
         }
 
         return $tickets;

@@ -98,7 +98,7 @@ if (isset($_GET['error'])) {
         </div>
     <?php } ?>
     <div id="grid">
-        <div id="groups">
+        <div id="left_panel">
             <h1>Groups</h1>
             <ul id="groups_list">
                 <?php
@@ -117,7 +117,7 @@ if (isset($_GET['error'])) {
                 <img src="/assets/img/plus.png" width="32px" id="plus">
             </button>
         </div>
-        <div id="operators">
+        <div id="work_space">
             <h1>Operators</h1>
             <div id="table">
                 <form id="table_form" action="editTicket" method="post">
